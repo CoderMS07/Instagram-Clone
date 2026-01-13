@@ -22,20 +22,6 @@ An Instagram Clone application built to replicate the core features of Instagram
 - Cloud Firestore
 - Firebase Storage
 
-📂 Project Structure :
-
-instagram_clone/
-│── lib/
-│   ├── screens/
-│   ├── widgets/
-│   ├── models/
-│   ├── services/
-│   └── main.dart
-│
-│── assets/
-│── pubspec.yaml
-│── README.md
-
 ⚙️ Installation & Setup : 
 
 1. Clone the repository : git clone https://github.com/your-username/instagram-clone.git
