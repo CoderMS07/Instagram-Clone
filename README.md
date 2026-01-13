@@ -41,11 +41,11 @@ An Instagram Clone application built to replicate the core features of Instagram
 
 🧠 Future Improvements : 
 
-Stories Feature
-Reels / Video Upload
-Push Notifications
-Search & Explore Page
-Dark Mode
+- Stories Feature
+- Reels / Video Upload
+- Push Notifications
+- Search & Explore Page
+- Dark Mode
 
 🤝 Contributing : 
 
