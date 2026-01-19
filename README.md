@@ -28,15 +28,27 @@ An Instagram Clone application built to replicate the core features of Instagram
 
 ⚙️ Installation & Setup : 
 
-1. Clone the repository : git clone https://github.com/your-username/instagram-clone.git
-2. Navigate to the project directory : cd instagram-clone
-3. Install dependencies : flutter pub get
+1. Clone the repository :
+   ```bash
+   git clone https://github.com/CoderMS07/Instagram-Clone.git
+   ```
+2. Navigate to the project directory :
+   ```bash
+   cd Instagram-Clone
+   ```
+3. Install dependencies :
+   ```bash
+   flutter pub get
+   ```
 4. Configure Firebase : 
     - Create a Firebase project
     - Enable Authentication, Firestore, and Storage
     - Add google-services.json / GoogleService-Info.plist
-5. Run the app : flutter run
-
+5. Run the app :
+   ```bash
+   flutter run
+   ```
+    
 ---
 
 🎯 Purpose of the Project : 
@@ -56,3 +68,5 @@ An Instagram Clone application built to replicate the core features of Instagram
 - Dark Mode
 
 ---
+
+Built with ❤️
