@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/provider/user_provider.dart';
-import 'package:instagram_clone/responsive_layout/mobile_screen_layout.dart';
-import 'package:instagram_clone/responsive_layout/web_screen_layout.dart';
+// import 'package:instagram_clone/responsive_layout/mobile_screen_layout.dart';
+// import 'package:instagram_clone/responsive_layout/web_screen_layout.dart';
 import 'package:instagram_clone/utils/global_variable.dart';
 import 'package:provider/provider.dart';
 

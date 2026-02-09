@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_svg/svg.dart';
+// import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:instagram_clone/resources/auth_methods.dart';
 import 'package:instagram_clone/screens/login_screen.dart';
 import 'package:instagram_clone/utils/colors.dart';
@@ -93,10 +94,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             appBar: AppBar(
               backgroundColor: mobileBackgroundColor,
               elevation: 0,
-              title: Text(
-                userData['username'],
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
+              title: SvgPicture.asset('assets/images/ic_instagram.svg', color: primaryColor,height: 32,),
               actions: const [
                 Icon(Icons.add_box_outlined),
                 SizedBox(width: 16),
@@ -175,7 +173,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
 
-                  //  Username & Bio
+                  //  Username and Bio
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16),
                     child: Align(
@@ -211,7 +209,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           child:
                               widget.uid ==
                                   FirebaseAuth.instance.currentUser!.uid
-                              //  If it's the current user's profile → show Edit button
+                              // Sign-out button
                               ? OutlinedButton(
                                   style: OutlinedButton.styleFrom(
                                     side: const BorderSide(
@@ -358,39 +356,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                   ),
-
-                  // 🔹 Story Highlights
-                  // SizedBox(
-                  //   height: 100,
-                  //   child: ListView.builder(
-                  //     scrollDirection: Axis.horizontal,
-                  //     padding: const EdgeInsets.symmetric(horizontal: 8),
-                  //     itemCount: storyImages.length,
-                  //     itemBuilder: (context, index) {
-                  //       return Padding(
-                  //         padding: const EdgeInsets.symmetric(horizontal: 10),
-                  //         child: Column(
-                  //           children: [
-                  //             CircleAvatar(
-                  //               radius: 32,
-                  //               backgroundImage: NetworkImage(
-                  //                 storyImages[index],
-                  //               ),
-                  //             ),
-                  //             const SizedBox(height: 6),
-                  //             Text(
-                  //               "Story $index",
-                  //               style: const TextStyle(fontSize: 12),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       );
-                  //     },
-                  //   ),
-                  // ),
                   const Divider(color: mobileBackgroundColor),
 
-                  // 🔹 Posts Grid
+                  // Posts Grid
                   FutureBuilder(
                     future: FirebaseFirestore.instance
                         .collection('posts')

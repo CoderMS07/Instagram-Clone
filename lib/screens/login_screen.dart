@@ -8,7 +8,7 @@ import 'package:instagram_clone/responsive_layout/responsive_page.dart'
 import 'package:instagram_clone/responsive_layout/web_screen_layout.dart'
     show WebScreen;
 import 'package:instagram_clone/screens/Sign_up_screen.dart';
-import 'package:instagram_clone/screens/mobile_screen.dart';
+// import 'package:instagram_clone/screens/mobile_screen.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/utils/global_variable.dart';
 import 'package:instagram_clone/utils/utils.dart' show showSnackBar;

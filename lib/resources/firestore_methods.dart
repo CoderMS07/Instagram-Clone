@@ -60,35 +60,44 @@ class FirestoreMethods {
   }
   // post comment
   Future<void> postComment(
-    String text,
-    String postId,
-    String uid,
-    String name,
-    String profilepic,
-  ) async {
-    try {
-      if (text.isNotEmpty) {
-        String commentId = Uuid().v1();
-        await _firestore
-            .collection('posts')
-            .doc(postId)
-            .collection('comments')
-            .doc(commentId)
-            .set({
-              'profile pic': profilepic,
-              'name': name,
-              'uid': uid,
-              'text': text,
-              'commentId': commentId,
-              'datePublished': DateTime.now(),
-            });
-      }else{
-        print('Text is Empty');
-      }
-    } catch (e) {
-      print(e.toString());
+  String text,
+  String postId,
+  String uid,
+  String name,
+  String profilepic,
+) async {
+  try {
+    if (text.isNotEmpty) {
+      String commentId = const Uuid().v1();
+
+      // Add comment document
+      await _firestore
+          .collection('posts')
+          .doc(postId)
+          .collection('comments')
+          .doc(commentId)
+          .set({
+        'profile pic': profilepic,
+        'name': name,
+        'uid': uid,
+        'text': text,
+        'commentId': commentId,
+        'datePublished': DateTime.now(),
+      });
+
+      // 🔥 Update comment count in the post document
+      await _firestore.collection('posts').doc(postId).update({
+        'commentCount': FieldValue.increment(1),
+      });
+
+    } else {
+      print('Text is Empty');
     }
+  } catch (e) {
+    print(e.toString());
   }
+}
+
 
   // delete post
   Future<void> deletePost(String postId) async{

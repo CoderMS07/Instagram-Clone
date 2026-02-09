@@ -30,20 +30,18 @@ class _PostSectionState extends State<PostSection> {
   }
 
   void getcomments() async {
-    try{
+    try {
       QuerySnapshot snap = await FirebaseFirestore.instance
-        .collection('posts')
-        .doc(widget.snap['postId'])
-        .collection('comments')
-        .get();
+          .collection('posts')
+          .doc(widget.snap['postId'])
+          .collection('comments')
+          .get();
 
-        commentLen=snap.docs.length;
-    }catch(err){
+      commentLen = snap.docs.length;
+    } catch (err) {
       showSnackBar(err.toString(), context);
     }
-    setState(() {
-      
-    });
+    setState(() {});
   }
 
   @override
@@ -95,8 +93,10 @@ class _PostSectionState extends State<PostSection> {
                             children: ['Delete']
                                 .map(
                                   (e) => InkWell(
-                                    onTap: () async{
-                                      FirestoreMethods().deletePost(widget.snap['postId']);
+                                    onTap: () async {
+                                      FirestoreMethods().deletePost(
+                                        widget.snap['postId'],
+                                      );
                                       Navigator.of(context).pop();
                                     },
                                     child: Container(
@@ -196,7 +196,27 @@ class _PostSectionState extends State<PostSection> {
                     ),
                     icon: Icon(Icons.comment_rounded),
                   ),
-                  Text(commentLen.toString(), style: Theme.of(context).textTheme.bodyText2),
+                  StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection('posts')
+                        .doc(widget.snap['postId'])
+                        .collection('comments')
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return Text(
+                          "0",
+                          style: Theme.of(context).textTheme.bodyText2,
+                        );
+                      }
+
+                      return Text(
+                        snapshot.data!.docs.length.toString(),
+                        style: Theme.of(context).textTheme.bodyText2,
+                      );
+                    },
+                  ),
+
                   IconButton(onPressed: () {}, icon: Icon(Icons.send_rounded)),
                 ],
               ),

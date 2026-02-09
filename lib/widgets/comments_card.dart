@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/models/User.dart';
-import 'package:instagram_clone/provider/user_provider.dart';
-import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
+// import 'package:instagram_clone/models/User.dart';
+// import 'package:instagram_clone/provider/user_provider.dart';
+// import 'package:intl/intl.dart';
+// import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class CommentsCard extends StatefulWidget {
