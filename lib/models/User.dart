@@ -19,18 +19,22 @@ class User {
       required this.following});
 
   static User fromSnap(DocumentSnapshot snap) {
-    var snapshot = snap.data() as Map<String, dynamic>;
-
-    return User(
-      username: snapshot["username"],
-      uid: snapshot["uid"],
-      email: snapshot["email"],
-      photoUrl: snapshot["photoUrl"],
-      bio: snapshot["bio"],
-      followers: snapshot["followers"],
-      following: snapshot["following"],
-    );
+  final data = snap.data();
+  if (data == null) {
+    throw Exception('No user profile found for uid: ${snap.id}');
   }
+  var snapshot = data as Map<String, dynamic>;
+
+  return User(
+    username: snapshot["username"],
+    uid: snapshot["uid"],
+    email: snapshot["email"],
+    photoUrl: snapshot["photoUrl"],
+    bio: snapshot["bio"],
+    followers: snapshot["followers"],
+    following: snapshot["following"],
+  );
+}
 
   Map<String, dynamic> toJson() => {
         "username": username,

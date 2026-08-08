@@ -17,7 +17,7 @@ class FirestoreMethods {
   ) async {
     String res = "Some error occurred";
     try {
-      // 1️⃣ Upload image to Supabase
+      // Upload image to Supabase
       String photoUrl = await StorageMethods().uploadImageToStorage(
         'insta-images',
         file,
@@ -85,7 +85,7 @@ class FirestoreMethods {
         'datePublished': DateTime.now(),
       });
 
-      // 🔥 Update comment count in the post document
+      // Update comment count in the post document
       await _firestore.collection('posts').doc(postId).update({
         'commentCount': FieldValue.increment(1),
       });

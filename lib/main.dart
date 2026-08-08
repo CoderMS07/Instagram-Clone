@@ -26,6 +26,7 @@ void main() async {
     anonKey:
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJobmNscnh0Yml1b25mbnR4Y3B5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzMTgyNDEsImV4cCI6MjA3Njg5NDI0MX0.1D2aaWkt7ZZBEdp5fZX1Nd-TsreGPEBEMgbR4Ic2_j8',
   );
+  await FirebaseAuth.instance.signOut();
 
   runApp(const MyApp());
 }

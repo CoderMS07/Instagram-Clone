@@ -7,8 +7,13 @@ class UserProvider with ChangeNotifier {
   User? _user;
   User get getUser => _user!;
   Future<void> refreshUser() async {
-    User user = await _authMethods.getUserDetails();
-    _user=user;
-    notifyListeners();
+  try {
+    User user = await AuthMethods().getUserDetails();
+    _user = user;
+  } catch (e) {
+    print('Failed to load user profile: $e');
+    _user = null;
   }
+  notifyListeners();
+}
 }

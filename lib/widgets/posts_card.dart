@@ -45,8 +45,11 @@ class _PostSectionState extends State<PostSection> {
 
   @override
   Widget build(BuildContext context) {
-    final User user = Provider.of<UserProvider>(context).getUser;
-    // Sample post data
+    final User? user = Provider.of<UserProvider>(context).getUser;
+
+    if (user == null) {
+      return const Center(child: CircularProgressIndicator());
+    }
     return Container(
       // height: 501,
       color: mobileBackgroundColor,

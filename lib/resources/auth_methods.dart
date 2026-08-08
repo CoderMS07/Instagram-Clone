@@ -16,28 +16,30 @@ class AuthMethods {
   }
 
   // sign up
- Future<String> SignUpUser({
-    required String email,
-    required String password,
-    required String username,
-    required String bio,
-    required Uint8List file,
-  }) async{
-    String res = "Some error occured";
-    try{
-      if(email.isNotEmpty && password.isNotEmpty && username.isNotEmpty && bio.isNotEmpty){
-        
-        UserCredential cred = await _auth.createUserWithEmailAndPassword(email: email, password: password);
-        print(cred.user!.uid);
+  Future<String> SignUpUser({
+  required String email,
+  required String password,
+  required String username,
+  required String bio,
+  required Uint8List file,
+}) async {
+  String res = "Some error occured";
+  try {
+    if (email.isNotEmpty && password.isNotEmpty && username.isNotEmpty && bio.isNotEmpty) {
+      UserCredential cred = await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      print("Auth user created: ${cred.user!.uid}");
 
-        
+      try {
         final StorageMethods _storageMethods = StorageMethods();
-
         final String imageUrl = await _storageMethods.uploadImageToStorage(
-          'insta-images', 
-          file,           
-          false,          
+          'insta-images',
+          file,
+          false,
         );
+        print("Image uploaded: $imageUrl");
 
         model.User user = model.User(
           username: username,
@@ -49,14 +51,25 @@ class AuthMethods {
           following: [],
         );
 
-       await _firestore.collection('users').doc(cred.user!.uid).set(user.toJson());
-        res="success";
+        await _firestore.collection('users').doc(cred.user!.uid).set(user.toJson());
+        print("Firestore doc created for: ${cred.user!.uid}");
+        res = "success";
+      } catch (innerErr) {
+        // Something failed after the auth account was created — roll it back
+        // so we don't leave an orphaned account behind.
+        print("Signup failed after auth creation, rolling back: $innerErr");
+        await cred.user!.delete();
+        res = "Signup failed: $innerErr";
       }
-    }catch(err){
-      res = err.toString();
+    } else {
+      res = "Please fill all the fields";
     }
-    return res;
+  } catch (err) {
+    print("SignUp error: $err");
+    res = err.toString();
   }
+  return res;
+}
 
   Future<String> loginUser({
     required String email,
